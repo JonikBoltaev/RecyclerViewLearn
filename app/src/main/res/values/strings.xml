@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RecyclerViewLearn</string>
+    <string name="fire">Fire</string>
+    <string name="unemployed">[Unemployed]</string>
 </resources>
