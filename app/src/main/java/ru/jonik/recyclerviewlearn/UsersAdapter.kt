@@ -117,7 +117,7 @@ class UsersAdapter(private val actionListener: UserActionListener) :
     }
 
     // Для обновления элемента списка
-    // Присуствуют ньюансы с if else
+    // Ньюансы с if else
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
         val user: User = users[position]
         val context = holder.itemView.context

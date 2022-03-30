@@ -8,52 +8,21 @@ import ru.jonik.recyclerviewlearn.databinding.ActivityMainBinding
 import ru.jonik.recyclerviewlearn.model.User
 import ru.jonik.recyclerviewlearn.model.UsersListener
 import ru.jonik.recyclerviewlearn.model.UsersService
+import ru.jonik.recyclerviewlearn.screens.UsersListFragment
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var adapter: UsersAdapter
-
-    private val usersService: UsersService
-        get() = (applicationContext as App).usersService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = UsersAdapter(object : UserActionListener {
-            override fun onUserMove(user: User, moveBy: Int) {
-                usersService.moveUser(user, moveBy)
-            }
-
-            override fun onUserDelete(user: User) {
-                usersService.deleteUser(user)
-            }
-
-            override fun onUserDetails(user: User) {
-                Toast.makeText(this@MainActivity, "User: ${user.name}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onUserFire(user: User) {
-                usersService.fireUser(user)
-            }
-        })
-
-        val layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = adapter
-
-        usersService.addListener(usersListener)
-    }
-
-    // Избежать утечку памяти
-    override fun onDestroy() {
-        super.onDestroy()
-        usersService.removeListener(usersListener)
-    }
-
-    private val usersListener: UsersListener = {
-        adapter.users = it
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, UsersListFragment())
+                .commit()
+        }
     }
 }
