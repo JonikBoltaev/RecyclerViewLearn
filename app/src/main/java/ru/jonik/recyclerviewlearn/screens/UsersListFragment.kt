@@ -36,7 +36,7 @@ class UsersListFragment : Fragment() {
             }
 
             override fun onUserDetails(user: User) {
-                TODO("Not yet implemented")
+                navigator().showDetails(user)
             }
 
             override fun onUserFire(user: User) {

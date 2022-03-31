@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.jonik.recyclerviewlearn.App
+import ru.jonik.recyclerviewlearn.Navigator
 import java.lang.IllegalStateException
 
 class ViewModelFactory(private val app: App) : ViewModelProvider.Factory {
@@ -11,6 +12,9 @@ class ViewModelFactory(private val app: App) : ViewModelProvider.Factory {
         val viewModel = when (modelClass) {
             UsersListViewModel::class.java -> {
                 UsersListViewModel(app.usersService)
+            }
+            UserDetailsViewModel::class.java -> {
+                UserDetailsViewModel(app.usersService)
             }
             else -> {
                 throw IllegalStateException("Unknown view model class")
@@ -21,3 +25,5 @@ class ViewModelFactory(private val app: App) : ViewModelProvider.Factory {
 }
 
 fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as App)
+
+fun Fragment.navigator() = requireActivity() as Navigator

@@ -1,6 +1,7 @@
 package ru.jonik.recyclerviewlearn.model
 
 import com.github.javafaker.Faker
+import ru.jonik.recyclerviewlearn.UserNotFoundException
 import java.util.*
 
 // Возвращает список обновленных пользователей
@@ -41,6 +42,14 @@ class UsersService {
             users.removeAt(indexToDelete)
             notifyChanges()
         }
+    }
+
+    fun getById(id: Long): UserDetails {
+        val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
+        return UserDetails(
+            user = user,
+            details = Faker.instance().lorem().paragraphs(3).joinToString { "\n\n" }
+        )
     }
 
     //Перемещение пользователя в списке
