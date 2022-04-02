@@ -14,7 +14,7 @@ import ru.jonik.recyclerviewlearn.databinding.FragmentUserDetailsBinding
 
 class UsersDetailsFragment : Fragment() {
 
-    // TODO Delete view models
+    // TODO View model navigation
     private lateinit var binding: FragmentUserDetailsBinding
     private val viewModel: UserDetailsViewModel by viewModels { factory() }
 
